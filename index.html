@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="BL4DE — developer, AI builder, and motion editor. websites, bots, and edits built from scratch." />
+    <title>BL4DE | Developer · AI Builder · Motion Editor</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+
+    <!-- ░░ LOADER ░░ -->
+    <div class="loader" id="siteLoader" aria-hidden="true">
+      <div class="loader-blade"></div>
+      <div class="loader-content">
+        <div class="loader-title">BL<span class="loader-accent">4</span>DE</div>
+        <div class="loader-bar"><span class="loader-bar-fill"></span></div>
+        <div class="loader-hint">motion · code · ai</div>
+      </div>
+    </div>
+
+    <canvas class="liquid-canvas" id="liquidCanvas" aria-hidden="true"></canvas>
+    <div class="pointer-sheen" aria-hidden="true"></div>
+    <div class="page-noise" aria-hidden="true"></div>
+
+    <svg class="filter-bank" aria-hidden="true" focusable="false">
+      <filter id="glass-wave">
+        <feTurbulence type="fractalNoise" baseFrequency="0.018 0.035" numOctaves="2" seed="7" />
+        <feDisplacementMap in="SourceGraphic" scale="7" />
+      </filter>
+    </svg>
+
+    <header class="site-header glass-strip">
+      <a class="brand" href="#top" aria-label="BL4DE home">
+        <span class="brand-pfp">
+          <!-- Cloud A — top-left -->
+          <span class="brand-cloud bc-a" aria-hidden="true">
+            <svg viewBox="0 0 155 95" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="77" cy="82" rx="68" ry="11" fill="#FFB08A" opacity="0.28"/>
+              <ellipse cx="77" cy="72" rx="68" ry="20" fill="#FFB896"/>
+              <ellipse cx="32" cy="56" rx="28" ry="25" fill="#FFCBA4"/>
+              <ellipse cx="62" cy="46" rx="33" ry="29" fill="#FFD0AA"/>
+              <ellipse cx="98" cy="51" rx="29" ry="25" fill="#FFCBA4"/>
+              <ellipse cx="127" cy="60" rx="24" ry="19" fill="#FFB896"/>
+              <ellipse cx="46" cy="42" rx="20" ry="17" fill="#FFD2B0"/>
+              <ellipse cx="82" cy="36" rx="23" ry="19" fill="#FFD8B4"/>
+              <ellipse cx="56" cy="31" rx="16" ry="13" fill="#FFE0C4"/>
+              <ellipse cx="84" cy="26" rx="17" ry="13" fill="#FFE4C8"/>
+              <ellipse cx="62" cy="23" rx="9"  ry="7"  fill="#FFF0E0" opacity="0.82"/>
+              <ellipse cx="86" cy="19" rx="10" ry="8"  fill="#FFF4E4" opacity="0.78"/>
+            </svg>
+          </span>
+          <!-- Cloud B — right -->
+          <span class="brand-cloud bc-b" aria-hidden="true">
+            <svg viewBox="0 0 115 74" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="57" cy="64" rx="52" ry="10" fill="#FFB08A" opacity="0.24"/>
+              <ellipse cx="57" cy="56" rx="52" ry="18" fill="#FFBB98"/>
+              <ellipse cx="26" cy="44" rx="23" ry="20" fill="#FFCBA4"/>
+              <ellipse cx="56" cy="36" rx="28" ry="24" fill="#FFD0AA"/>
+              <ellipse cx="84" cy="40" rx="23" ry="20" fill="#FFCBA4"/>
+              <ellipse cx="66" cy="24" rx="19" ry="15" fill="#FFD5B0"/>
+              <ellipse cx="60" cy="17" rx="11" ry="9"  fill="#FFE8D0"/>
+              <ellipse cx="74" cy="19" rx="9"  ry="7"  fill="#FFF0E0" opacity="0.8"/>
+            </svg>
+          </span>
+          <!-- Cloud C — bottom-left -->
+          <span class="brand-cloud bc-c" aria-hidden="true">
+            <svg viewBox="0 0 98 62" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="49" cy="54" rx="43" ry="9"  fill="#FFB08A" opacity="0.2"/>
+              <ellipse cx="49" cy="46" rx="43" ry="15" fill="#FFBB96"/>
+              <ellipse cx="22" cy="36" rx="20" ry="18" fill="#FFCBA4"/>
+              <ellipse cx="46" cy="28" rx="24" ry="20" fill="#FFD0AA"/>
+              <ellipse cx="73" cy="33" rx="20" ry="17" fill="#FFCBA4"/>
+              <ellipse cx="54" cy="16" rx="13" ry="10" fill="#FFE4C4"/>
+              <ellipse cx="50" cy="11" rx="8"  ry="6"  fill="#FFF0DC" opacity="0.85"/>
+            </svg>
+          </span>
+          <!-- Avatar -->
+          <img src="pfp.jpg" alt="" class="brand-avatar" />
+        </span>
+        <span class="brand-name">BL4DE</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#work">Work</a>
+        <a href="#development">Dev</a>
+        <a href="#motion">Motion</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+
+      <!-- ░░ HERO ░░ -->
+      <section class="hero section-panel" aria-labelledby="hero-title">
+        <div class="hero-ribbon hero-ribbon-one" aria-hidden="true"></div>
+        <div class="hero-ribbon hero-ribbon-two" aria-hidden="true"></div>
+
+        <div class="hero-copy">
+          <p class="eyebrow reveal">developer · ai builder · motion editor</p>
+          <h1 id="hero-title" class="reveal">
+            <span>BL4DE</span>
+            <span class="h1-line">builds different.</span>
+          </h1>
+          <p class="hero-text reveal">
+            Websites that work, bots that think, edits that land. All made from scratch — no templates, no shortcuts.
+          </p>
+
+          <div class="role-switcher glass-chip reveal" aria-live="polite">
+            <span class="role-label">right now building</span>
+            <strong id="roleText">ai tools that pull weight</strong>
+          </div>
+
+          <div class="hero-actions reveal">
+            <a class="button primary magnetic" href="mailto:techzy101@gmail.com" data-magnet>
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+              </span>
+              Hit Me Up
+            </a>
+            <a class="button ghost magnetic" href="https://www.youtube.com/@Bl4de-editz" target="_blank" rel="noreferrer" data-magnet>
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 5.8c.2-.6.8-1 1.4-1.1 3.7-.3 7.5-.3 11.2 0 .6.1 1.2.5 1.4 1.1.7 2.1.7 6.3 0 8.4-.2.6-.8 1-1.4 1.1-3.7.3-7.5.3-11.2 0-.6-.1-1.2-.5-1.4-1.1-.7-2.1-.7-6.3 0-8.4Z"/><path d="m10 8 5 3-5 3V8Z"/></svg>
+              </span>
+              Watch Edits
+            </a>
+          </div>
+
+          <div class="signal-row reveal" aria-label="Portfolio highlights">
+            <div><strong>Web</strong><span>Sites + apps</span></div>
+            <div><strong>AI</strong><span>Bots + automation</span></div>
+            <div><strong>Motion</strong><span>Edits + typography</span></div>
+          </div>
+        </div>
+
+        <!-- PFP with cloud decor -->
+        <div class="hero-stage reveal" data-tilt>
+          <div class="pfp-stage">
+
+            <!-- Cloud A — large, top-left -->
+            <div class="cloud-decor cloud-a">
+              <svg viewBox="0 0 155 95" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="77" cy="82" rx="68" ry="11" fill="#FFB08A" opacity="0.28"/>
+                <ellipse cx="77" cy="72" rx="68" ry="20" fill="#FFB896"/>
+                <ellipse cx="32" cy="56" rx="28" ry="25" fill="#FFCBA4"/>
+                <ellipse cx="62" cy="46" rx="33" ry="29" fill="#FFD0AA"/>
+                <ellipse cx="98" cy="51" rx="29" ry="25" fill="#FFCBA4"/>
+                <ellipse cx="127" cy="60" rx="24" ry="19" fill="#FFB896"/>
+                <ellipse cx="46" cy="42" rx="20" ry="17" fill="#FFD2B0"/>
+                <ellipse cx="82" cy="36" rx="23" ry="19" fill="#FFD8B4"/>
+                <ellipse cx="115" cy="45" rx="18" ry="15" fill="#FFCBA4"/>
+                <ellipse cx="56" cy="31" rx="16" ry="13" fill="#FFE0C4"/>
+                <ellipse cx="84" cy="26" rx="17" ry="13" fill="#FFE4C8"/>
+                <ellipse cx="102" cy="34" rx="13" ry="10" fill="#FFD8B8"/>
+                <ellipse cx="62" cy="23" rx="9"  ry="7"  fill="#FFF0E0" opacity="0.82"/>
+                <ellipse cx="86" cy="19" rx="10" ry="8"  fill="#FFF4E4" opacity="0.78"/>
+                <ellipse cx="42" cy="36" rx="7"  ry="5"  fill="#FFE8D4" opacity="0.7"/>
+              </svg>
+            </div>
+
+            <!-- Cloud B — medium, right -->
+            <div class="cloud-decor cloud-b">
+              <svg viewBox="0 0 115 74" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="57" cy="64" rx="52" ry="10" fill="#FFB08A" opacity="0.24"/>
+                <ellipse cx="57" cy="56" rx="52" ry="18" fill="#FFBB98"/>
+                <ellipse cx="26" cy="44" rx="23" ry="20" fill="#FFCBA4"/>
+                <ellipse cx="56" cy="36" rx="28" ry="24" fill="#FFD0AA"/>
+                <ellipse cx="84" cy="40" rx="23" ry="20" fill="#FFCBA4"/>
+                <ellipse cx="100" cy="49" rx="18" ry="14" fill="#FFB898"/>
+                <ellipse cx="38" cy="30" rx="17" ry="14" fill="#FFD8B4"/>
+                <ellipse cx="66" cy="24" rx="19" ry="15" fill="#FFD5B0"/>
+                <ellipse cx="90" cy="32" rx="14" ry="11" fill="#FFCBA4"/>
+                <ellipse cx="60" cy="17" rx="11" ry="9"  fill="#FFE8D0"/>
+                <ellipse cx="74" cy="19" rx="9"  ry="7"  fill="#FFF0E0" opacity="0.8"/>
+                <ellipse cx="44" cy="24" rx="7"  ry="5"  fill="#FFE4CC" opacity="0.75"/>
+              </svg>
+            </div>
+
+            <!-- Cloud C — small, bottom-left -->
+            <div class="cloud-decor cloud-c">
+              <svg viewBox="0 0 98 62" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="49" cy="54" rx="43" ry="9"  fill="#FFB08A" opacity="0.2"/>
+                <ellipse cx="49" cy="46" rx="43" ry="15" fill="#FFBB96"/>
+                <ellipse cx="22" cy="36" rx="20" ry="18" fill="#FFCBA4"/>
+                <ellipse cx="46" cy="28" rx="24" ry="20" fill="#FFD0AA"/>
+                <ellipse cx="73" cy="33" rx="20" ry="17" fill="#FFCBA4"/>
+                <ellipse cx="88" cy="41" rx="15" ry="12" fill="#FFB898"/>
+                <ellipse cx="36" cy="22" rx="15" ry="12" fill="#FFD8B4"/>
+                <ellipse cx="54" cy="16" rx="13" ry="10" fill="#FFE4C4"/>
+                <ellipse cx="70" cy="24" rx="11" ry="9"  fill="#FFD5B0"/>
+                <ellipse cx="50" cy="11" rx="8"  ry="6"  fill="#FFF0DC" opacity="0.85"/>
+                <ellipse cx="38" cy="14" rx="6"  ry="5"  fill="#FFE8CC" opacity="0.7"/>
+              </svg>
+            </div>
+
+            <!-- Avatar circle -->
+            <div class="avatar-frame">
+              <img src="pfp.jpg" alt="BL4DE avatar" />
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ░░ ABOUT ░░ -->
+      <section class="about band" id="work" aria-labelledby="about-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">About BL4DE</p>
+          <h2 id="about-title">No templates. No shortcuts. Just built.</h2>
+        </div>
+        <div class="about-grid">
+          <article class="about-card glass-card reveal" data-tilt>
+            <span class="card-index">01</span>
+            <h3>Websites that feel designed</h3>
+            <p>Landing pages, portfolios, full web apps — built fast, looks clean, actually yours.</p>
+          </article>
+          <article class="about-card glass-card reveal" data-tilt>
+            <span class="card-index">02</span>
+            <h3>AI that actually works</h3>
+            <p>Chatbots, support bots, automation — baked into your site, runs while you don't.</p>
+          </article>
+          <article class="about-card glass-card reveal" data-tilt>
+            <span class="card-index">03</span>
+            <h3>Edits that smack</h3>
+            <p>Kinetic text, beat sync, typography animation — the kind of edit people screenshot and save.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ░░ DEVELOPMENT ░░ -->
+      <section class="skills section-panel" id="development" aria-labelledby="development-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Development</p>
+          <h2 id="development-title">The actual stack — web, AI, backend.</h2>
+        </div>
+        <div class="skill-matrix">
+          <article class="skill-column glass-card reveal" data-tilt>
+            <div class="skill-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M4 9h16"/><path d="M8 14h3"/><path d="M13 14h3"/></svg>
+            </div>
+            <h3>Website Development</h3>
+            <ul>
+              <li>Responsive Websites</li>
+              <li>Landing Pages</li>
+              <li>Portfolio Websites</li>
+              <li>Business Websites</li>
+              <li>Custom Web Applications</li>
+            </ul>
+          </article>
+          <article class="skill-column glass-card reveal" data-tilt>
+            <div class="skill-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><path d="M7.8 7.8 5.7 5.7"/><path d="m18.3 18.3-2.1-2.1"/><path d="m16.2 7.8 2.1-2.1"/><path d="m5.7 18.3 2.1-2.1"/><circle cx="12" cy="12" r="4"/></svg>
+            </div>
+            <h3>AI Development</h3>
+            <ul>
+              <li>Custom AI Chatbots</li>
+              <li>Website AI Integration</li>
+              <li>Customer Support Assistants</li>
+              <li>Knowledge Base Bots</li>
+              <li>AI Automation Solutions</li>
+            </ul>
+          </article>
+          <article class="skill-column glass-card reveal" data-tilt>
+            <div class="skill-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m8 9-4 3 4 3"/><path d="m16 9 4 3-4 3"/><path d="m14 4-4 16"/></svg>
+            </div>
+            <h3>Programming</h3>
+            <ul>
+              <li>Python Development</li>
+              <li>API Integration</li>
+              <li>Backend Development</li>
+              <li>AI Application Development</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- ░░ MOTION ░░ -->
+      <section class="motion band" id="motion" aria-labelledby="motion-title">
+        <div class="motion-copy reveal">
+          <p class="eyebrow">Typography Motion Editing</p>
+          <h2 id="motion-title">When the text moves like this, people stop scrolling.</h2>
+          <p>I use Alight Motion to make the type of edits people save. Kinetic typography, beat-sync, clean text — built to hit.</p>
+          <div class="tool-pills">
+            <span>Alight Motion</span>
+          </div>
+        </div>
+
+        <div class="edit-board glass-card reveal" data-tilt>
+          <!-- Local MP4 auto-plays in a loop; clicking opens the YouTube version -->
+          <div class="video-card" role="group" aria-label="Edit showcase">
+            <video
+              class="video-local"
+              src="edit.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+            ></video>
+            <div class="video-overlay"></div>
+
+            <!-- YouTube link badge — bottom-right -->
+            <a
+              class="yt-badge"
+              href="https://youtu.be/JrsYdn0FKF4"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Watch on YouTube"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 5.8c.2-.6.8-1 1.4-1.1 3.7-.3 7.5-.3 11.2 0 .6.1 1.2.5 1.4 1.1.7 2.1.7 6.3 0 8.4-.2.6-.8 1-1.4 1.1-3.7.3-7.5.3-11.2 0-.6-.1-1.2-.5-1.4-1.1-.7-2.1-.7-6.3 0-8.4Z"/>
+                <path d="m10 8 5 3-5 3V8Z"/>
+              </svg>
+              Watch on YouTube ↗
+            </a>
+
+            <span class="video-label-top">EDIT SHOWCASE · 0:24</span>
+          </div>
+          <div class="timeline" aria-hidden="true">
+            <span class="track track-one"></span>
+            <span class="track track-two"></span>
+            <span class="track track-three"></span>
+            <span class="track track-four"></span>
+            <span class="playhead"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ░░ SERVICES ░░ -->
+      <section class="services section-panel" id="services" aria-labelledby="services-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Services</p>
+          <h2 id="services-title">Three things I do well.</h2>
+        </div>
+        <div class="service-grid">
+          <article class="service-card glass-card reveal" data-tilt>
+            <span class="service-number">01</span>
+            <h3>Web Development</h3>
+            <p>Built for businesses, creators, and brands that actually want to stand out — not blend in.</p>
+          </article>
+          <article class="service-card glass-card reveal" data-tilt>
+            <span class="service-number">02</span>
+            <h3>AI Solutions</h3>
+            <p>Custom bots that integrate into your site and handle what you don't want to do manually.</p>
+          </article>
+          <article class="service-card glass-card reveal" data-tilt>
+            <span class="service-number">03</span>
+            <h3>Motion Editing</h3>
+            <p>Typography, kinetic text, beat-sync — made to stop scrolls, get saved, and get shared.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ░░ PORTFOLIO ░░ -->
+      <section class="portfolio band" aria-labelledby="portfolio-title">
+        <div class="portfolio-panel glass-card reveal" data-tilt>
+          <div>
+            <p class="eyebrow">Portfolio</p>
+            <h2 id="portfolio-title">All the motion work lives on YouTube.</h2>
+            <p>Edits, kinetic typography, showcases — it's all on the channel.</p>
+          </div>
+          <a class="youtube-button magnetic" href="https://www.youtube.com/@Bl4de-editz" target="_blank" rel="noreferrer" data-magnet aria-label="Open BL4DE YouTube channel">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 5.8c.2-.6.8-1 1.4-1.1 3.7-.3 7.5-.3 11.2 0 .6.1 1.2.5 1.4 1.1.7 2.1.7 6.3 0 8.4-.2.6-.8 1-1.4 1.1-3.7.3-7.5.3-11.2 0-.6-.1-1.2-.5-1.4-1.1-.7-2.1-.7-6.3 0-8.4Z"/>
+              <path d="m10 8 5 3-5 3V8Z"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- ░░ STRENGTHS ░░ -->
+      <section class="strengths section-panel" aria-labelledby="strengths-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Strengths</p>
+          <h2 id="strengths-title">What I actually bring to the table.</h2>
+        </div>
+        <div class="marquee glass-strip reveal" aria-label="BL4DE strengths">
+          <div class="marquee-track">
+            <span>Creative + technical</span>
+            <span>Problem-solving</span>
+            <span>Fast learner</span>
+            <span>Attention to detail</span>
+            <span>Ships fast</span>
+            <span>Built different</span>
+            <span>No AI slop</span>
+            <span>From scratch always</span>
+            <span>Creative + technical</span>
+            <span>Problem-solving</span>
+            <span>Fast learner</span>
+            <span>Attention to detail</span>
+            <span>Ships fast</span>
+            <span>Built different</span>
+            <span>No AI slop</span>
+            <span>From scratch always</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ░░ CONTACT ░░ -->
+      <section class="contact band" id="contact" aria-labelledby="contact-title">
+        <div class="contact-card glass-card reveal">
+          <p class="eyebrow">Contact</p>
+          <h2 id="contact-title">Let's build something people actually remember.</h2>
+          <p class="contact-name">BL4DE</p>
+          <div class="contact-actions">
+            <a class="button primary magnetic" href="mailto:techzy101@gmail.com" data-magnet>
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+              </span>
+              techzy101@gmail.com
+            </a>
+            <a class="button ghost magnetic" href="https://www.youtube.com/@Bl4de-editz" target="_blank" rel="noreferrer" data-magnet>
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 5.8c.2-.6.8-1 1.4-1.1 3.7-.3 7.5-.3 11.2 0 .6.1 1.2.5 1.4 1.1.7 2.1.7 6.3 0 8.4-.2.6-.8 1-1.4 1.1-3.7.3-7.5.3-11.2 0-.6-.1-1.2-.5-1.4-1.1-.7-2.1-.7-6.3 0-8.4Z"/><path d="m10 8 5 3-5 3V8Z"/></svg>
+              </span>
+              YouTube
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>BL4DE</p>
+      <p>Websites, AI, and motion — all from one person who actually cares.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
