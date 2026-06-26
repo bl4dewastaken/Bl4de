@@ -9,14 +9,63 @@
   </head>
   <body>
 
-    <!-- ░░ LOADER ░░ -->
+    <!-- ░░ LOADER — BL4DE system init ░░ -->
     <div class="loader" id="siteLoader" aria-hidden="true">
-      <div class="loader-blade"></div>
-      <div class="loader-content">
-        <div class="loader-title">BL<span class="loader-accent">4</span>DE</div>
-        <div class="loader-bar"><span class="loader-bar-fill"></span></div>
-        <div class="loader-hint">motion · code · ai</div>
+      <canvas id="lCanvas" class="l-canvas"></canvas>
+      <div class="l-grid"></div>
+      <div class="l-scan"></div>
+
+      <div class="hud-corner hc-tl"></div>
+      <div class="hud-corner hc-tr"></div>
+      <div class="hud-corner hc-bl"></div>
+      <div class="hud-corner hc-br"></div>
+
+      <div class="l-slash l-slash-1"></div>
+      <div class="l-slash l-slash-2"></div>
+      <div class="l-slash l-slash-3"></div>
+
+      <div class="l-side l-side-l">
+        <span>SYS_INIT</span><span>v2.0.26</span>
+        <span>MOTION</span><span>WEB / AI</span><span>BL4DE.DEV</span>
       </div>
+      <div class="l-side l-side-r">
+        <span>PORTFOLIO</span><span>DEVELOPER</span>
+        <span>LOADING</span><span>████████</span><span>ONLINE</span>
+      </div>
+
+      <div class="l-center">
+        <div class="l-eye">
+          <span class="l-eye-dash"></span>
+          <span class="l-eye-text">SYSTEM INITIALIZED</span>
+          <span class="l-eye-dash"></span>
+        </div>
+
+        <div class="l-title-group">
+          <div class="l-title" aria-label="BL4DE">
+            <span class="ltc" style="--i:0">B</span>
+            <span class="ltc" style="--i:1">L</span>
+            <span class="ltc ltc-red" style="--i:2">4</span>
+            <span class="ltc" style="--i:3">D</span>
+            <span class="ltc" style="--i:4">E</span>
+          </div>
+          <div class="l-glitch" aria-hidden="true">BL<span class="lg-4">4</span>DE</div>
+        </div>
+
+        <div class="l-sub"><span id="lSubTxt"></span><span class="l-cur">_</span></div>
+
+        <div class="l-prog">
+          <div class="l-prog-bar">
+            <div class="l-prog-fill" id="lFill"></div>
+            <div class="l-prog-tip"  id="lTip"></div>
+          </div>
+          <div class="l-prog-meta">
+            <span class="l-prog-lbl">LOADING</span>
+            <span class="l-prog-pct" id="lPct">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="l-strips" id="lStrips"></div>
     </div>
 
     <canvas class="liquid-canvas" id="liquidCanvas" aria-hidden="true"></canvas>
