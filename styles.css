@@ -1865,3 +1865,242 @@ h1 > span:first-child {
 
 /* Hide old brand-mark if it's still in the DOM somehow */
 .brand-mark { display: none; }
+
+/* ============================================================
+   LOADER v3 — full rewrite, high detail
+   ============================================================ */
+
+/* kill old loader pieces */
+.loader-blade,.loader-content,.loader-title,.loader-accent,
+.loader-bar,.loader-bar-fill,.loader-hint{display:none!important}
+
+/* ── base ── */
+.loader{
+  position:fixed!important;inset:0!important;z-index:9999!important;
+  background:#060606!important;overflow:hidden!important;display:block!important;
+}
+
+/* ── particle canvas ── */
+.l-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+
+/* ── red grid ── */
+.l-grid{
+  position:absolute;inset:0;z-index:2;
+  background-image:
+    linear-gradient(rgba(229,9,20,.065) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(229,9,20,.065) 1px,transparent 1px);
+  background-size:52px 52px;
+  opacity:0;animation:lgIn .8s ease .05s forwards;
+}
+@keyframes lgIn{to{opacity:1}}
+
+/* ── scan line ── */
+.l-scan{
+  position:absolute;left:0;right:0;top:0;height:3px;z-index:8;
+  background:linear-gradient(90deg,transparent 0%,rgba(229,9,20,.55) 25%,rgba(255,255,255,.55) 50%,rgba(229,9,20,.55) 75%,transparent 100%);
+  box-shadow:0 0 22px rgba(229,9,20,.5),0 0 60px rgba(229,9,20,.18);
+  animation:lScan 1.05s cubic-bezier(.4,0,.6,1) .1s forwards;pointer-events:none;
+}
+@keyframes lScan{0%{transform:translateY(0);opacity:1}90%{opacity:.6}100%{transform:translateY(100vh);opacity:0}}
+
+/* ── HUD corner brackets ── */
+.hud-corner{position:absolute;z-index:6;width:46px;height:46px;pointer-events:none}
+.hc-tl{top:20px;left:20px}
+.hc-tr{top:20px;right:20px;transform:scaleX(-1)}
+.hc-bl{bottom:20px;left:20px;transform:scaleY(-1)}
+.hc-br{bottom:20px;right:20px;transform:scale(-1)}
+
+.hud-corner::before,.hud-corner::after{content:'';position:absolute;background:rgba(229,9,20,.78)}
+.hud-corner::before{top:0;left:0;width:2px;height:32px;transform:scaleY(0);transform-origin:top;animation:hcV .4s cubic-bezier(.4,0,.1,1) .2s forwards}
+.hud-corner::after {top:0;left:0;width:32px;height:2px;transform:scaleX(0);transform-origin:left;animation:hcH .4s cubic-bezier(.4,0,.1,1) .2s forwards}
+@keyframes hcV{to{transform:scaleY(1)}}
+@keyframes hcH{to{transform:scaleX(1)}}
+
+/* corner dot */
+.hud-corner::before{box-shadow:0 0 8px rgba(229,9,20,.45)}
+
+/* ── diagonal slash decorations ── */
+.l-slash{
+  position:absolute;left:-10%;right:-10%;height:1px;z-index:3;pointer-events:none;
+  background:linear-gradient(90deg,transparent 0%,rgba(229,9,20,.22) 30%,rgba(229,9,20,.38) 50%,rgba(229,9,20,.22) 70%,transparent 100%);
+  opacity:0;
+}
+.l-slash-1{top:28%;transform:rotate(-8deg);animation:lSlashIn .5s ease .32s forwards}
+.l-slash-2{top:50%;transform:rotate(-8deg);animation:lSlashIn .5s ease .42s forwards}
+.l-slash-3{top:72%;transform:rotate(-8deg);animation:lSlashIn .5s ease .52s forwards}
+@keyframes lSlashIn{to{opacity:1}}
+
+/* ── side data panels ── */
+.l-side{
+  position:absolute;top:50%;transform:translateY(-50%);
+  z-index:6;display:flex;flex-direction:column;gap:16px;
+  pointer-events:none;
+}
+.l-side-l{left:26px}
+.l-side-r{right:26px;text-align:right}
+
+.l-side span{
+  display:block;font-size:.58rem;font-weight:800;
+  letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(229,9,20,.52);opacity:0;
+}
+.l-side-l span:nth-child(1){animation:lSL .3s ease .38s forwards}
+.l-side-l span:nth-child(2){animation:lSL .3s ease .50s forwards}
+.l-side-l span:nth-child(3){animation:lSL .3s ease .62s forwards}
+.l-side-l span:nth-child(4){animation:lSL .3s ease .74s forwards}
+.l-side-l span:nth-child(5){animation:lSL .3s ease .86s forwards;color:rgba(229,9,20,.28)}
+
+.l-side-r span:nth-child(1){animation:lSR .3s ease .38s forwards}
+.l-side-r span:nth-child(2){animation:lSR .3s ease .50s forwards}
+.l-side-r span:nth-child(3){animation:lSR .3s ease .62s forwards}
+.l-side-r span:nth-child(4){animation:lSR .3s ease .74s forwards;color:rgba(229,9,20,.22)}
+.l-side-r span:nth-child(5){animation:lSR .3s ease .86s forwards;color:rgba(229,9,20,.42)}
+
+@keyframes lSL{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
+@keyframes lSR{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+
+/* ── center column ── */
+.l-center{
+  position:absolute;inset:0;z-index:5;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+}
+
+/* eyebrow */
+.l-eye{display:flex;align-items:center;gap:14px;opacity:0;animation:lFU .35s ease .62s forwards}
+.l-eye-text{font-size:.62rem;font-weight:800;letter-spacing:.32em;text-transform:uppercase;color:rgba(229,9,20,.65)}
+.l-eye-dash{display:block;height:1px;width:38px;background:rgba(229,9,20,.4);transform:scaleX(0);animation:lDash .4s ease .68s forwards}
+@keyframes lDash{to{transform:scaleX(1)}}
+
+/* title group (title + glitch share same space) */
+.l-title-group{position:relative;display:inline-flex}
+
+/* main title letters */
+.l-title{display:flex;gap:.02em;line-height:1;user-select:none}
+
+.ltc{
+  font-size:clamp(5rem,18vw,13rem);
+  font-weight:950;letter-spacing:-.03em;
+  color:#fff;display:inline-block;
+  opacity:0;min-width:.56em;text-align:center;
+  transition:transform .16s ease;
+}
+.ltc-red{
+  color:#ff3448;
+  text-shadow:0 0 28px rgba(229,9,20,.95),0 0 70px rgba(229,9,20,.5),0 0 120px rgba(229,9,20,.25);
+}
+
+/* glitch overlay */
+.l-glitch{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(5rem,18vw,13rem);font-weight:950;letter-spacing:-.03em;
+  color:#fff;white-space:nowrap;
+  opacity:0;pointer-events:none;z-index:7;
+  animation:glitchCycle 3.6s linear 2s infinite;
+}
+.l-glitch .lg-4{color:#ff3448}
+
+@keyframes glitchCycle{
+  0%,100%{opacity:0}
+  2%{opacity:1;clip-path:polygon(0 8%,100% 8%,100% 20%,0 20%);
+     transform:translate(-4px,0) skewX(-2deg);
+     text-shadow:4px 0 rgba(255,20,20,1),-4px 0 rgba(20,40,255,.85)}
+  3%{opacity:0}
+  8%{opacity:0}
+  10%{opacity:1;clip-path:polygon(0 52%,100% 52%,100% 68%,0 68%);
+      transform:translate(5px,0) skewX(3deg);
+      text-shadow:-5px 0 rgba(255,20,20,.9),5px 0 rgba(20,40,255,.75)}
+  11%{opacity:0}
+  20%{opacity:0}
+  22%{opacity:1;clip-path:polygon(0 28%,100% 28%,100% 42%,0 42%);
+      transform:translate(-7px,0) skewX(-3.5deg);
+      text-shadow:6px 0 rgba(255,20,20,1),-6px 0 rgba(20,40,255,.9)}
+  23%{opacity:1;clip-path:polygon(0 28%,100% 28%,100% 42%,0 42%);
+      transform:translate(3px,0)}
+  24%{opacity:0}
+  48%{opacity:0}
+  50%{opacity:1;clip-path:polygon(0 5%,100% 5%,100% 16%,0 16%);
+      transform:translate(5px,0) skewX(1.5deg);
+      text-shadow:-4px 0 rgba(255,20,20,.85),4px 0 rgba(20,40,255,.7)}
+  51%{opacity:0}
+  70%{opacity:0}
+  72%{opacity:1;clip-path:polygon(0 60%,100% 60%,100% 77%,0 77%);
+      transform:translate(-3px,0) skewX(-2deg);
+      text-shadow:3px 0 rgba(255,20,20,.75),-3px 0 rgba(20,40,255,.6)}
+  73%{opacity:0}
+  88%{opacity:0}
+  90%{opacity:1;clip-path:polygon(0 35%,100% 35%,100% 48%,0 48%);
+      transform:translate(6px,0) skewX(4deg);
+      text-shadow:-6px 0 rgba(255,20,20,1),6px 0 rgba(20,40,255,.85)}
+  91%{opacity:0}
+}
+
+/* typing subtitle */
+.l-sub{
+  display:flex;align-items:center;height:22px;
+  opacity:0;animation:lFU .3s ease 1.1s forwards;
+}
+#lSubTxt{
+  font-size:.68rem;font-weight:700;letter-spacing:.24em;
+  text-transform:uppercase;color:rgba(255,255,255,.35);
+}
+.l-cur{
+  color:rgba(229,9,20,.85);font-size:.8rem;font-weight:900;
+  animation:lCur .85s step-end infinite;margin-left:2px;
+}
+@keyframes lCur{0%,100%{opacity:1}50%{opacity:0}}
+
+/* progress */
+.l-prog{
+  display:flex;flex-direction:column;gap:8px;
+  width:min(340px,60vw);opacity:0;animation:lFU .3s ease 1.0s forwards;
+}
+.l-prog-bar{
+  position:relative;height:3px;border-radius:3px;overflow:hidden;
+  background:
+    repeating-linear-gradient(90deg,rgba(229,9,20,.1) 0,rgba(229,9,20,.1) 1px,transparent 1px,transparent 18px),
+    rgba(255,255,255,.04);
+}
+.l-prog-fill{
+  height:100%;
+  background:linear-gradient(90deg,#4a0005,#c80810,#e50914,#ff3448,rgba(255,210,210,.9));
+  transform:scaleX(0);transform-origin:left;border-radius:3px;will-change:transform;
+}
+.l-prog-tip{
+  position:absolute;top:-5px;bottom:-5px;width:24px;
+  background:radial-gradient(ellipse at center,rgba(229,9,20,.9) 0%,transparent 70%);
+  pointer-events:none;will-change:left;
+}
+.l-prog-meta{display:flex;justify-content:space-between;align-items:center}
+.l-prog-lbl{font-size:.58rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:rgba(229,9,20,.48)}
+.l-prog-pct{font-size:.7rem;font-weight:900;letter-spacing:.06em;color:rgba(255,255,255,.52);font-variant-numeric:tabular-nums}
+
+/* utility */
+@keyframes lFU{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ── exit strips ── */
+.l-strips{position:absolute;inset:0;z-index:20;pointer-events:none}
+.l-strip{position:absolute;top:0;height:100%;background:#060606}
+
+.loader.exiting .l-strip{
+  animation:lStripUp .56s cubic-bezier(.86,0,.07,1) forwards;
+  animation-delay:var(--sd,0ms);
+}
+.loader.exiting .l-strip.ld{animation-name:lStripDown}
+
+@keyframes lStripUp  {to{transform:translateY(-105%)}}
+@keyframes lStripDown{to{transform:translateY(105%)}}
+
+/* hide all other loader content on exit */
+.loader.exiting .l-center,
+.loader.exiting .l-grid,
+.loader.exiting .hud-corner,
+.loader.exiting .l-side,
+.loader.exiting .l-scan,
+.loader.exiting .l-slash{opacity:0;transition:opacity .16s ease}
+
+/* ── responsive ── */
+@media(max-width:600px){
+  .l-side{display:none}
+  .l-slash{display:none}
+}
